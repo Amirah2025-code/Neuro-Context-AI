@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Neuro-Context AI</title>
+
+    <!-- الخط الذهبي الاحترافي -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600;900&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Cairo', sans-serif;
+            background: #000;
+            color: #e5c068;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #000 0%, #1a1a1a 50%, #000 100%);
+            padding: 25px;
+            text-align: center;
+            font-size: 32px;
+            font-weight: 900;
+            border-bottom: 1px solid #3d2b12;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 50px auto;
+            padding: 25px;
+            border: 1px solid #3d2b12;
+            border-radius: 12px;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 0 20px rgba(255, 193, 71, 0.12);
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #5a4b2f;
+            background: #111;
+            color: #ffd98a;
+            font-size: 18px;
+            resize: none;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: none;
+            font-size: 20px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #000;
+            background: linear-gradient(90deg, #e5c068, #f7d88c);
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #f3d07a, #ffe3a6);
+            transform: scale(1.03);
+        }
+
+        .output {
+            margin-top: 35px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #664e18;
+            background: #0c0c0c;
+            min-height: 150px;
+            line-height: 1.7;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">NEURO-CONTEXT AI</div>
+
+    <div class="container">
+        <div class="title">تحليل سياقي عميق</div>
+        <textarea id="userInput" placeholder="اكتب أي نص لتحليله بشكل ذكي…"></textarea>
+        <button onclick="analyze()">ابدأ التحليل</button>
+
+        <div class="output" id="result">هنا يظهر التحليل المتقدم…</div>
+    </div>
+
+    <script>
+        function analyze() {
+            const text = document.getElementById("userInput").value.trim();
+            const output = document.getElementById("result");
+
+            if (!text) {
+                output.innerHTML = "❗ الرجاء إدخال نص أولاً.";
+                return;
+            }
+
+            // نموذج تحليل مزيف للعرض فقط (سيتم استبداله بمحرك الذكاء الحقيقي)
+            output.innerHTML = 
+                "<b>🔍 تحليل أوّلي:</b><br>" +
+                "النص يحتوي على " + text.length + " حرفاً.<br>" +
+                "<br><b>🧠 استنتاج ذكي (نسخة تجريبية):</b><br>" +
+                "هناك مؤشرات على سياق عاطفي / فكري سيتم معالجته لاحقاً عبر المحرك العصبي.";
+        }
+    </script>
+
+</body>
+</html>
