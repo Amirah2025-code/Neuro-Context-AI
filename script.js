@@ -1,111 +1,68 @@
-// ===============================
-//  NEURO-CONTEXT AI CORE ENGINE
-//  Ultra-Precision Semantic Analyzer
-//  © 2025 – Amirah
-// ===============================
+function analyze() {
+    let text = document.getElementById("inputText").value.trim();
+    let resultBox = document.getElementById("result");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const input = document.getElementById("userInput");
-    const resultBox = document.getElementById("result");
+    if (text.length === 0) {
+        resultBox.innerHTML = "❗ الرجاء كتابة النص أولاً للبدء بالتحليل.";
+        return;
+    }
 
-    window.analyze = function () {
-        const text = input.value.trim();
+    // تأثير تحميل وهمي سريع (شكل احترافي)
+    resultBox.innerHTML = "🔍 جاري تحليل السياق بشكل عميق...";
+    setTimeout(() => {
+        resultBox.innerHTML = generateDeepAnalysis(text);
+    }, 800);
+}
 
-        if (text.length === 0) {
-            resultBox.innerHTML = "⚠️ الرجاء إدخال نص للتحليل.";
-            return;
-        }
-
-        // MAIN AI ENGINE
-        const analysis = neuroContextEngine(text);
-
-        // OUTPUT
-        resultBox.innerHTML = analysis;
-    };
-});
-
-// ===============================
-//    INTELLIGENT ANALYSIS ENGINE
-// ===============================
-function neuroContextEngine(text) {
-
-    // 1 ـــــــ استخراج النبرة
-    const tone = detectTone(text);
-
-    // 2 ـــــــ تحليل المعنى الدقيق
-    const intent = detectIntent(text);
-
-    // 3 ـــــــ تحليل المشاعر ودرجة القوة
-    const emotion = detectEmotion(text);
-
-    // 4 ـــــــ بنية الجملة والتناسق
-    const structure = detectStructure(text);
-
-    // 5 ـــــــ إنشاء تقرير متكامل
+/* ====== محرك التحليل الاحترافي ====== */
+function generateDeepAnalysis(text) {
     return `
-    <div class='box'>
-        <h2>🔍 التحليل السياقي المتقدم</h2>
+        <b>🔶 التحليل السياقي العميق:</b><br><br>
 
-        <p><strong>🟡 النبرة:</strong> ${tone}</p>
-        <p><strong>🟣 النية الأساسية:</strong> ${intent}</p>
-        <p><strong>🔵 الحالة الشعورية:</strong> ${emotion}</p>
-        <p><strong>🟠 البنية اللغوية:</strong> ${structure}</p>
+        <b>▫️ فهم النبرة العامة:</b><br>
+        ${detectTone(text)}<br><br>
 
-        <hr>
+        <b>▫️ تحليل المشاعر المخفية:</b><br>
+        ${detectEmotion(text)}<br><br>
 
-        <h3>🧠 التلخيص الذكي:</h3>
-        <p>${smartSummary(text)}</p>
-    </div>
+        <b>▫️ النقاط الجوهرية في النص:</b><br>
+        ${extractKeyPoints(text)}<br><br>
+
+        <b>▫️ الاستنتاج الذكي:</b><br>
+        ${generateConclusion(text)}
     `;
 }
 
-// =======================================
-//       MODULE (1): Tone Detection
-// =======================================
+/* ====== تحليل النبرة ====== */
 function detectTone(text) {
-    if (/شك|أظن|ربما/.test(text)) return "متردد";
-    if (/أريد|أحتاج/.test(text)) return "حازم";
-    if (/شكراً|ممتاز|جميل/.test(text)) return "إيجابي";
-    if (/لا|خطأ|مستحيل/.test(text)) return "رافض";
-
-    return "محايد";
+    if (text.includes("لا") || text.includes("مش") || text.includes("خطأ")) {
+        return "النبرة تميل إلى السلبية أو الاعتراض.";
+    }
+    if (text.includes("شكراً") || text.includes("ممتاز") || text.includes("رائع")) {
+        return "النبرة إيجابية ومتحمسة.";
+    }
+    return "النبرة حيادية بدون ميل واضح.";
 }
 
-// =======================================
-//       MODULE (2): Intent Detection
-// =======================================
-function detectIntent(text) {
-    if (/ليش|لماذا|كيف/.test(text)) return "بحث عن تفسير";
-    if (/أريد|ارجو|ساعد/.test(text)) return "طلب مساعدة";
-    if (/اعمل|نفذ|سوي/.test(text)) return "أمر مباشر";
-
-    return "نية عامة غير محددة";
-}
-
-// =======================================
-//       MODULE (3): Emotion Detection
-// =======================================
+/* ====== تحليل المشاعر ====== */
 function detectEmotion(text) {
-    if (/زعلان|حزين/.test(text)) return "حزن";
-    if (/معصب|غاضب/.test(text)) return "غضب";
-    if (/خايف|قلقان/.test(text)) return "قلق";
-    if (/مبسوط|سعيد/.test(text)) return "سعادة";
-
-    return "غير واضح";
+    if (text.includes("خائف") || text.includes("قلق") || text.includes("تعبت")) {
+        return "يوجد شعور بالضغط أو القلق.";
+    }
+    if (text.includes("سعيد") || text.includes("مبسوط") || text.includes("فرحان")) {
+        return "يوجد طاقة عاطفية إيجابية.";
+    }
+    return "لا تظهر مشاعر واضحة في النص.";
 }
 
-// =======================================
-//       MODULE (4): Structure Analysis
-// =======================================
-function detectStructure(text) {
-    if (text.length < 20) return "قصير ومباشر";
-    if (text.length < 60) return "متوسط وواضح";
-    return "نص طويل يحتوي تفاصيل متعددة";
+/* ====== استخراج النقاط الأساسية ====== */
+function extractKeyPoints(text) {
+    let words = text.split(" ");
+    let short = words.slice(0, 6).join(" ");
+    return `يبدو أنك تتحدث عن: <i>${short}...</i>`;
 }
 
-// =======================================
-//       Module (5): Smart Summary
-// =======================================
-function smartSummary(text) {
-    return "النص يعكس: " + text.slice(0, 40) + (text.length > 40 ? "..." : "");
+/* ====== الاستنتاج ====== */
+function generateConclusion(text) {
+    return "النص يعبر عن فكرة واضحة، ويمكن تطويره أو فهمه بشكل أعمق بناءً على السياق الكامل.";
 }
