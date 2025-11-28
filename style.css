@@ -1,75 +1,99 @@
-/* Golden Black Luxury UI */
-
+/* ====== GLOBAL STYLE ====== */
 body {
-    background-color: #000;
-    color: #d4af37;
-    font-family: "Poppins", sans-serif;
     margin: 0;
     padding: 0;
+    font-family: 'Cairo', sans-serif;
+    background: #000;
+    color: #e5c068;
+    overflow-x: hidden;
 }
 
-header {
+/* ====== HEADER ====== */
+.header {
+    font-size: 38px;
     text-align: center;
-    padding: 40px 0;
-    border-bottom: 1px solid #d4af37;
+    padding: 25px 0;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #1a1a1a, #0d0d0d);
+    border-bottom: 2px solid #e5c068;
+    text-shadow: 0 0 15px rgba(229, 192, 104, 0.7);
 }
 
-.title {
-    font-size: 42px;
-    font-weight: 700;
-    color: #d4af37;
-}
-
+/* ====== CONTAINER ====== */
 .container {
-    max-width: 800px;
+    width: 90%;
+    max-width: 900px;
     margin: 40px auto;
-    padding: 20px;
     background: rgba(20, 20, 20, 0.85);
-    border: 1px solid #d4af37;
-    border-radius: 12px;
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.5);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #e5c06844;
+    box-shadow: 0 0 25px rgba(229, 192, 104, 0.25);
 }
 
-label {
-    font-size: 20px;
-    color: #d4af37;
+/* TITLE */
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
+/* DESCRIPTION */
+.desc {
+    opacity: 0.85;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* TEXT AREA */
 textarea {
     width: 100%;
-    height: 160px;
-    background: #0d0d0d;
-    border: 1px solid #d4af37;
-    color: #d4af37;
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 6px;
+    height: 170px;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 12px;
+    border: 2px solid #e5c06855;
+    outline: none;
+    background: #111;
+    color: #e5c068;
+    resize: none;
+    transition: 0.3s;
 }
 
+textarea:focus {
+    border-color: #e5c068;
+    box-shadow: 0 0 10px rgba(229, 192, 104, 0.5);
+}
+
+/* BUTTON */
 button {
+    margin-top: 20px;
     width: 100%;
     padding: 15px;
-    margin-top: 20px;
-    background: linear-gradient(90deg, #b8860b, #ffd700);
-    color: #000;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 22px;
     border: none;
-    border-radius: 8px;
+    border-radius: 12px;
     cursor: pointer;
+    background: linear-gradient(135deg, #b58a30, #e5c068);
+    color: #000;
+    font-weight: 700;
     transition: 0.3s;
 }
 
 button:hover {
-    opacity: 0.85;
+    transform: scale(1.03);
+    box-shadow: 0 0 20px rgba(229, 192, 104, 0.6);
 }
 
-.output-box {
-    margin-top: 20px;
-    background: #111;
-    border: 1px solid #d4af37;
+/* OUTPUT BOX */
+.output {
+    margin-top: 25px;
+    background: #0e0e0e;
     padding: 20px;
-    border-radius: 10px;
-    color: #ffd700;
-    font-size: 18px;
+    border-radius: 12px;
+    border: 1px solid #e5c06855;
+    min-height: 150px;
+    line-height: 1.8;
+    font-size: 19px;
 }
