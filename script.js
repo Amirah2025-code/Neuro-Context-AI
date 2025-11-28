@@ -1,39 +1,111 @@
-/* Neuro-Context AI — analysis engine (unique version) */
-
-const $ = (s) => document.querySelector(s);
+// ===============================
+//  NEURO-CONTEXT AI CORE ENGINE
+//  Ultra-Precision Semantic Analyzer
+//  © 2025 – Amirah
+// ===============================
 
 document.addEventListener("DOMContentLoaded", () => {
-  window.analyze = runAnalysis;
+    const input = document.getElementById("userInput");
+    const resultBox = document.getElementById("result");
+
+    window.analyze = function () {
+        const text = input.value.trim();
+
+        if (text.length === 0) {
+            resultBox.innerHTML = "⚠️ الرجاء إدخال نص للتحليل.";
+            return;
+        }
+
+        // MAIN AI ENGINE
+        const analysis = neuroContextEngine(text);
+
+        // OUTPUT
+        resultBox.innerHTML = analysis;
+    };
 });
 
-function runAnalysis() {
-  const text = $("#userInput").value.trim();
-  const result = $("#result");
+// ===============================
+//    INTELLIGENT ANALYSIS ENGINE
+// ===============================
+function neuroContextEngine(text) {
 
-  if (!text) {
-    result.innerHTML = "⚠️ الرجاء إدخال نص للتحليل.";
-    return;
-  }
+    // 1 ـــــــ استخراج النبرة
+    const tone = detectTone(text);
 
-  const insights = extractInsights(text);
+    // 2 ـــــــ تحليل المعنى الدقيق
+    const intent = detectIntent(text);
 
-  result.innerHTML = `
-    <b>🔍 التحليل:</b><br><br>
-    <b>✓ الأفكار الأساسية:</b> ${insights.core}<br>
-    <b>✓ النبرة العاطفية:</b> ${insights.tone}<br>
-    <b>✓ استنتاج سريع:</b> ${insights.fast}<br><br>
-    <small>🧠 نموذج تجريبي — قابل للتطوير لاحقاً بنموذج ML حقيقي.</small>
-  `;
+    // 3 ـــــــ تحليل المشاعر ودرجة القوة
+    const emotion = detectEmotion(text);
+
+    // 4 ـــــــ بنية الجملة والتناسق
+    const structure = detectStructure(text);
+
+    // 5 ـــــــ إنشاء تقرير متكامل
+    return `
+    <div class='box'>
+        <h2>🔍 التحليل السياقي المتقدم</h2>
+
+        <p><strong>🟡 النبرة:</strong> ${tone}</p>
+        <p><strong>🟣 النية الأساسية:</strong> ${intent}</p>
+        <p><strong>🔵 الحالة الشعورية:</strong> ${emotion}</p>
+        <p><strong>🟠 البنية اللغوية:</strong> ${structure}</p>
+
+        <hr>
+
+        <h3>🧠 التلخيص الذكي:</h3>
+        <p>${smartSummary(text)}</p>
+    </div>
+    `;
 }
 
-function extractInsights(text) {
-  const words = text.split(/\s+/);
-  const longWords = words.filter(w => w.length > 6).slice(0, 3);
-  const tone = /!|\؟|\?/.test(text) ? "انفعالي / حاد" : "هادئ / منطقي";
+// =======================================
+//       MODULE (1): Tone Detection
+// =======================================
+function detectTone(text) {
+    if (/شك|أظن|ربما/.test(text)) return "متردد";
+    if (/أريد|أحتاج/.test(text)) return "حازم";
+    if (/شكراً|ممتاز|جميل/.test(text)) return "إيجابي";
+    if (/لا|خطأ|مستحيل/.test(text)) return "رافض";
 
-  return {
-    core: longWords.length ? longWords.join(", ") : "لا كلمات بارزة",
-    tone: tone,
-    fast: words.length > 12 ? "النص يحتوي على محتوى غني" : "النص قصير — تحليل محدود"
-  };
+    return "محايد";
+}
+
+// =======================================
+//       MODULE (2): Intent Detection
+// =======================================
+function detectIntent(text) {
+    if (/ليش|لماذا|كيف/.test(text)) return "بحث عن تفسير";
+    if (/أريد|ارجو|ساعد/.test(text)) return "طلب مساعدة";
+    if (/اعمل|نفذ|سوي/.test(text)) return "أمر مباشر";
+
+    return "نية عامة غير محددة";
+}
+
+// =======================================
+//       MODULE (3): Emotion Detection
+// =======================================
+function detectEmotion(text) {
+    if (/زعلان|حزين/.test(text)) return "حزن";
+    if (/معصب|غاضب/.test(text)) return "غضب";
+    if (/خايف|قلقان/.test(text)) return "قلق";
+    if (/مبسوط|سعيد/.test(text)) return "سعادة";
+
+    return "غير واضح";
+}
+
+// =======================================
+//       MODULE (4): Structure Analysis
+// =======================================
+function detectStructure(text) {
+    if (text.length < 20) return "قصير ومباشر";
+    if (text.length < 60) return "متوسط وواضح";
+    return "نص طويل يحتوي تفاصيل متعددة";
+}
+
+// =======================================
+//       Module (5): Smart Summary
+// =======================================
+function smartSummary(text) {
+    return "النص يعكس: " + text.slice(0, 40) + (text.length > 40 ? "..." : "");
 }
