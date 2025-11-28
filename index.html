@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neuro-Context AI</title>
 
     <!-- خط القاهرة -->
@@ -13,27 +13,21 @@
 </head>
 
 <body>
-    <!-- الهيدر -->
+
     <div class="header">NEURO-CONTEXT AI</div>
 
-    <!-- الحاوية الرئيسية -->
     <div class="container">
-
         <div class="title">تحليل سياقي عميق</div>
 
-        <!-- مربع الإدخال -->
-        <textarea id="inputText" class="input" placeholder="اكتب أي نص لتحليله بشكل ذكي..."></textarea>
+        <textarea id="userText" placeholder="اكتب أي نص لتحليله بشكل ذكي..."></textarea>
 
-        <!-- زر التحليل -->
-        <button class="analyze-btn" onclick="analyze()">بدء التحليل</button>
+        <button onclick="analyze()">ابدأ التحليل</button>
 
-        <!-- نتيجة التحليل -->
         <div class="output" id="result">هنا يظهر التحليل المتقدم</div>
     </div>
 
-    <!-- ربط ملف السكربت -->
+    <!-- ربط ملف JS -->
     <script src="script.js"></script>
+
 </body>
 </html>
-
-  
