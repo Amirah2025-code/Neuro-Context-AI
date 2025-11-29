@@ -1,16 +1,31 @@
-# main.py — FastAPI + اتصال بسيط بـ OpenAI (GPT)
+# main.py - FastAPI + اتصال جاهز مع OpenAI
+
 import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from dotenv import load_dotenv
 
-# حاول استيراد مكتبة openai إذا موجودة
+# تحميل ملف .env
+load_dotenv()
+
+# استيراد OpenAI
 try:
-    import openai
+    from openai import OpenAI
 except Exception:
-    openai = None
+    raise Exception("مكتبة openai غير منصّبة. ثبّتها باستخدام: pip install openai")
+
+# جلب المفتاح من .env
+API_KEY = os.getenv("OPENAI_API_KEY")
+
+if not API_KEY:
+    raise Exception("مفتاح OPENAI_API_KEY غير موجود داخل ملف .env")
+
+client = OpenAI(api_key=API_KEY)
 
 app = FastAPI()
 
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -19,49 +34,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def root():
-    return {"message": "Neuro-Context-AI backend is running"}
+# الموديل المستخدم
+MODEL = "gpt-4.1-mini"
 
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+# تعريف شكل البيانات القادمة
+class InputText(BaseModel):
+    text: str
+
+@app.get("/")
+def home():
+    return {"status": "API is running successfully!"}
 
 @app.post("/api/analyze")
-async def analyze(data: dict):
-    """
-    يتلقى JSON مثل: {"text": "نص تريد تحليله"}
-    سيحاول استخدام OpenAI إذا مفتاح API موجود، وإلا يرجع استجابة بسيطة.
-    """
-    text = data.get("text", "")
-    if not text:
-        raise HTTPException(status_code=400, detail="Missing 'text' in request body.")
-
-    # استخدم متغيّر البيئة OPENAI_API_KEY — تعيينه خطوة لاحقة
-    api_key = os.environ.get("OPENAI_API_KEY")
-
-    # إذا مكتبة openai غير منصّبة أو مفتاح غير موجود نرجع رد بدائي
-    if not openai or not api_key:
-        # fallback بسيط (بدون AI) — مجرد echo مع بعض النصائح
-        return {
-            "analysis": f"(fallback) Received text: {text}",
-            "note": "OpenAI not configured. Set environment variable OPENAI_API_KEY to enable AI."
-        }
-
-    # تهيئة مكتبة OpenAI
-    openai.api_key = api_key
-
+async def analyze_text(data: InputText):
     try:
-        resp = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+        response = client.chat.completions.create(
+            model=MODEL,
             messages=[
-                {"role": "system", "content": "أنت مساعد مختص بتحليل النصوص وإعطاء ملخص نقاط رئيسية واقتراحات."},
-                {"role": "user", "content": f"حلّل النص التالي واعطِ: (1) ملخّص قصير، (2) أهم 3 نقاط، (3) اقتراح تحسين واحد.\n\n{text}"}
-            ],
-            max_tokens=500,
-            temperature=0.2,
+                {"role": "user", "content": data.text}
+            ]
         )
-        content = resp["choices"][0]["message"]["content"].strip()
-        return {"analysis": content}
+
+        result = response.choices[0].message["content"]
+        return {"result": result}
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"AI error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"AI Error: {str(e)}")
